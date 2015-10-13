@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.daluga.com/baseball/boxscore" targetNamespace="http://www.daluga.com/baseball/boxscore" elementFormDefault="qualified">
+	<xs:element name="text_data" type="xs:string"/>
+	<xs:element name="pitching">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pitcher" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="team_flag" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="away"/>
+						<xs:enumeration value="home"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="so" type="xs:byte" use="required"/>
+			<xs:attribute name="r" type="xs:byte" use="required"/>
+			<xs:attribute name="out" type="xs:byte" use="required"/>
+			<xs:attribute name="hr" type="xs:byte" use="required"/>
+			<xs:attribute name="h" type="xs:byte" use="required"/>
+			<xs:attribute name="era" type="xs:decimal" use="required"/>
+			<xs:attribute name="er" type="xs:byte" use="required"/>
+			<xs:attribute name="bf" type="xs:byte" use="required"/>
+			<xs:attribute name="bb" type="xs:byte" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pitcher">
+		<xs:complexType mixed="true">
+			<xs:attribute name="w" type="xs:byte" use="required"/>
+			<xs:attribute name="sv" type="xs:byte" use="required"/>
+			<xs:attribute name="so" type="xs:byte" use="required"/>
+			<xs:attribute name="r" type="xs:byte" use="required"/>
+			<xs:attribute name="pos" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="P"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="out" type="xs:byte" use="required"/>
+			<xs:attribute name="note" type="xs:string" use="optional"/>
+			<xs:attribute name="name_display_first_last" type="xs:string" use="required"/>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+			<xs:attribute name="l" type="xs:byte" use="required"/>
+			<xs:attribute name="id" type="xs:int" use="required"/>
+			<xs:attribute name="hr" type="xs:byte" use="required"/>
+			<xs:attribute name="hld" type="xs:byte" use="required"/>
+			<xs:attribute name="h" type="xs:byte" use="required"/>
+			<xs:attribute name="era" type="xs:decimal" use="required"/>
+			<xs:attribute name="er" type="xs:byte" use="required"/>
+			<xs:attribute name="bs" type="xs:byte" use="required"/>
+			<xs:attribute name="bf" type="xs:byte" use="required"/>
+			<xs:attribute name="bb" type="xs:byte" use="required"/>
+			<xs:attribute name="np" type="xs:byte" use="required"/>
+			<xs:attribute name="s" type="xs:byte" use="required"/>
+			<xs:attribute name="s_ip" type="xs:decimal" use="required"/>
+			<xs:attribute name="s_h" type="xs:integer" use="required"/>
+			<xs:attribute name="s_r" type="xs:byte" use="required"/>
+			<xs:attribute name="s_er" type="xs:byte" use="required"/>
+			<xs:attribute name="s_bb" type="xs:byte" use="required"/>
+			<xs:attribute name="s_so" type="xs:integer" use="required"/>
+			<xs:attribute name="win" type="xs:boolean" use="optional"/>
+			<xs:attribute name="loss" type="xs:boolean" use="optional"/>
+			<xs:attribute name="save" type="xs:boolean" use="optional"/>
+			<xs:attribute name="blown_save" type="xs:boolean" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="note" type="xs:string"/>
+	<xs:element name="linescore">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="inning_line_score" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="home_team_runs" type="xs:byte" use="required"/>
+			<xs:attribute name="home_team_hits" type="xs:byte" use="required"/>
+			<xs:attribute name="home_team_errors" type="xs:byte" use="required"/>
+			<xs:attribute name="away_team_runs" type="xs:byte" use="required"/>
+			<xs:attribute name="away_team_hits" type="xs:byte" use="required"/>
+			<xs:attribute name="away_team_errors" type="xs:byte" use="required"/>
+			<xs:attribute name="note" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="inning_line_score">
+		<xs:complexType>
+			<xs:attribute name="inning" type="xs:byte" use="required"/>
+			<xs:attribute name="home" type="xs:string" use="required"/>
+			<xs:attribute name="away" type="xs:byte" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="game_info" type="xs:string"/>
+	<xs:element name="boxscore">
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref="linescore"/>
+				<xs:element ref="pitching"/>
+				<xs:element ref="batting"/>
+				<xs:element ref="pitching"/>
+				<xs:element ref="batting"/>
+				<xs:element ref="game_info"/>
+			</xs:sequence>
+			<xs:attribute name="status_ind" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="F"/>
+						<xs:enumeration value="FT"/>
+						<xs:enumeration value="I"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="home_wins" type="xs:byte" use="required"/>
+			<xs:attribute name="home_team_code" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="ana"/>
+						<xs:enumeration value="atl"/>
+						<xs:enumeration value="ari"/>
+						<xs:enumeration value="bal"/>
+						<xs:enumeration value="bos"/>
+						<xs:enumeration value="cha"/>
+						<xs:enumeration value="chn"/>
+						<xs:enumeration value="cin"/>
+						<xs:enumeration value="cle"/>
+						<xs:enumeration value="col"/>
+						<xs:enumeration value="det"/>
+						<xs:enumeration value="flo"/>
+						<xs:enumeration value="hou"/>
+						<xs:enumeration value="kca"/>
+						<xs:enumeration value="lan"/>
+						<xs:enumeration value="mil"/>
+						<xs:enumeration value="min"/>
+						<xs:enumeration value="nya"/>
+						<xs:enumeration value="nyn"/>
+						<xs:enumeration value="oak"/>
+						<xs:enumeration value="phi"/>
+						<xs:enumeration value="pit"/>
+						<xs:enumeration value="sdn"/>
+						<xs:enumeration value="sea"/>
+						<xs:enumeration value="sfn"/>
+						<xs:enumeration value="sln"/>
+						<xs:enumeration value="tba"/>
+						<xs:enumeration value="tex"/>
+						<xs:enumeration value="tor"/>
+						<xs:enumeration value="was"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="home_sport_code" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="mlb"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="home_sname" type="xs:string" use="required"/>
+			<xs:attribute name="home_loss" type="xs:byte" use="required"/>
+			<xs:attribute name="home_id" type="xs:unsignedByte" use="required"/>
+			<xs:attribute name="home_fname" type="xs:string" use="required"/>
+			<xs:attribute name="game_pk" type="xs:int" use="required"/>
+			<xs:attribute name="game_id" type="xs:string" use="required"/>
+			<xs:attribute name="venue_id" type="xs:int" use="required"/>
+			<xs:attribute name="venue_name" type="xs:string" use="required"/>
+			<xs:attribute name="date" type="xs:string" use="required"/>
+			<xs:attribute name="away_wins" type="xs:byte" use="required"/>
+			<xs:attribute name="away_team_code" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="ana"/>
+						<xs:enumeration value="atl"/>
+						<xs:enumeration value="ari"/>
+						<xs:enumeration value="bal"/>
+						<xs:enumeration value="bos"/>
+						<xs:enumeration value="cha"/>
+						<xs:enumeration value="chn"/>
+						<xs:enumeration value="cin"/>
+						<xs:enumeration value="cle"/>
+						<xs:enumeration value="col"/>
+						<xs:enumeration value="det"/>
+						<xs:enumeration value="flo"/>
+						<xs:enumeration value="hou"/>
+						<xs:enumeration value="kca"/>
+						<xs:enumeration value="lan"/>
+						<xs:enumeration value="mil"/>
+						<xs:enumeration value="min"/>
+						<xs:enumeration value="nya"/>
+						<xs:enumeration value="nyn"/>
+						<xs:enumeration value="oak"/>
+						<xs:enumeration value="phi"/>
+						<xs:enumeration value="pit"/>
+						<xs:enumeration value="sdn"/>
+						<xs:enumeration value="sea"/>
+						<xs:enumeration value="sfn"/>
+						<xs:enumeration value="sln"/>
+						<xs:enumeration value="tba"/>
+						<xs:enumeration value="tex"/>
+						<xs:enumeration value="tor"/>
+						<xs:enumeration value="was"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="away_sname" type="xs:string" use="required"/>
+			<xs:attribute name="away_loss" type="xs:byte" use="required"/>
+			<xs:attribute name="away_id" type="xs:short" use="required"/>
+			<xs:attribute name="away_fname" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="batting">
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref="batter" maxOccurs="unbounded"/>
+				<xs:element ref="note" minOccurs="0"/>
+				<xs:element ref="text_data"/>
+			</xs:sequence>
+			<xs:attribute name="team_flag" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="away"/>
+						<xs:enumeration value="home"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="t" type="xs:byte" use="required"/>
+			<xs:attribute name="so" type="xs:byte" use="required"/>
+			<xs:attribute name="rbi" type="xs:byte" use="required"/>
+			<xs:attribute name="r" type="xs:byte" use="required"/>
+			<xs:attribute name="po" type="xs:byte" use="required"/>
+			<xs:attribute name="lob" type="xs:byte" use="required"/>
+			<xs:attribute name="hr" type="xs:byte" use="required"/>
+			<xs:attribute name="h" type="xs:byte" use="required"/>
+			<xs:attribute name="da" type="xs:byte" use="required"/>
+			<xs:attribute name="d" type="xs:byte" use="required"/>
+			<xs:attribute name="bb" type="xs:byte" use="required"/>
+			<xs:attribute name="avg" type="xs:decimal" use="required"/>
+			<xs:attribute name="ab" type="xs:byte" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="batter">
+		<xs:complexType>
+			<xs:attribute name="t" type="xs:byte" use="required"/>
+			<xs:attribute name="so" type="xs:byte" use="required"/>
+			<xs:attribute name="sf" type="xs:byte" use="required"/>
+			<xs:attribute name="sb" type="xs:byte" use="required"/>
+			<xs:attribute name="sac" type="xs:byte" use="required"/>
+			<xs:attribute name="s_rbi" type="xs:byte" use="required"/>
+			<xs:attribute name="s_hr" type="xs:byte" use="required"/>
+			<xs:attribute name="rbi" type="xs:byte" use="required"/>
+			<xs:attribute name="r" type="xs:byte" use="required"/>
+			<xs:attribute name="pos" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="1B"/>
+						<xs:enumeration value="2B"/>
+						<xs:enumeration value="3B"/>
+						<xs:enumeration value="C"/>
+						<xs:enumeration value="CF"/>
+						<xs:enumeration value="LF"/>
+						<xs:enumeration value="P"/>
+						<xs:enumeration value="PH"/>
+						<xs:enumeration value="RF"/>
+						<xs:enumeration value="SS"/>
+						<xs:enumeration value="DH"/>
+						<xs:enumeration value="PR-DH"/>
+						<xs:enumeration value="2B-3B"/>
+						<xs:enumeration value="3B-CF"/>
+						<xs:enumeration value="SS-2B"/>
+						<xs:enumeration value="CF-2B"/>
+						<xs:enumeration value="LF-CF"/>
+						<xs:enumeration value="CF-RF"/>
+						<xs:enumeration value="PH-1B"/>
+						<xs:enumeration value="PH-3B"/>
+						<xs:enumeration value="PH-C"/>
+						<xs:enumeration value="PH-LF"/>
+						<xs:enumeration value="PH-RF"/>
+						<xs:enumeration value="PR-2B"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="po" type="xs:byte" use="required"/>
+			<xs:attribute name="note" type="xs:string"/>
+			<xs:attribute name="name_display_first_last" type="xs:string" use="required"/>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+			<xs:attribute name="lob" type="xs:byte" use="required"/>
+			<xs:attribute name="id" type="xs:int" use="required"/>
+			<xs:attribute name="hr" type="xs:byte" use="required"/>
+			<xs:attribute name="hbp" type="xs:byte" use="required"/>
+			<xs:attribute name="h" type="xs:byte" use="required"/>
+			<xs:attribute name="fldg" type="xs:decimal" use="required"/>
+			<xs:attribute name="e" type="xs:byte" use="required"/>
+			<xs:attribute name="d" type="xs:byte" use="required"/>
+			<xs:attribute name="bo" type="xs:short" use="optional"/>
+			<xs:attribute name="bb" type="xs:byte" use="required"/>
+			<xs:attribute name="avg" type="xs:decimal" use="required"/>
+			<xs:attribute name="ab" type="xs:byte" use="required"/>
+			<xs:attribute name="a" type="xs:byte" use="required"/>
+			<xs:attribute name="cs" type="xs:byte" use="required"/>
+			<xs:attribute name="s_h" type="xs:integer" use="required"/>
+			<xs:attribute name="s_bb" type="xs:byte" use="required"/>
+			<xs:attribute name="s_r" type="xs:byte" use="required"/>
+			<xs:attribute name="s_so" type="xs:integer" use="required"/>
+			<xs:attribute name="ao" type="xs:byte" use="required"/>
+			<xs:attribute name="go" type="xs:byte" use="optional"/>
+			<xs:attribute name="gidp" type="xs:byte" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
